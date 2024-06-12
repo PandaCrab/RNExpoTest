@@ -5,7 +5,13 @@ import { useQuery } from '@apollo/client';
 import { COUNTRIES_QUERY } from '../api/api';
 import UnorderedList from '@/components/UnorderedList';
 
-const CountriesScreen: React.FC<any> = ({navigation, route}) => {
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { CountriesStackParamsList } from '@/Types/types';
+
+// type Props = NativeStackScreenProps<CountriesStackParamsList, 'Countries'>
+
+
+const CountriesScreen= ({navigation, route}: any) => {
     const { code } = route.params;
     const { data, loading } = useQuery(COUNTRIES_QUERY, {
         variables: {

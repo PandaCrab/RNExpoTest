@@ -7,5 +7,15 @@ export const styles = StyleSheet.create({
         height: '100%',
         display: 'flex',
         backgroundColor: 'white', 
+    },
+    themedText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+
+    },
+    text: {
+        marginBottom: 10,
+        fontSize: 16,
+        
     }
 });

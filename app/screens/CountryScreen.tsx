@@ -6,6 +6,8 @@ import { COUNTRY_QUERY } from '../api/api';
 
 import { styles } from '@/styles/CountryScreenStyles';
 
+// type Props = NativeStackScreenProps<CountryStackParamList, 'Country'>;
+
 type Data = {
     code?: string;
     continent: {
@@ -24,7 +26,7 @@ type Data = {
     }]
 };
 
-const CountryScreen: React.FC<any> = ({ navigation, route }) => {
+const CountryScreen = ({ navigation, route }: any) => {
     const [country, setCountry] = useState<Data>();
 
     const { code } = route.params;
@@ -33,7 +35,7 @@ const CountryScreen: React.FC<any> = ({ navigation, route }) => {
             code
         }
     });
-console.log(country?.languages)
+
     const dataCatcher: (arg1: Data) => void = async (data) => {
         if (data) {
             await setCountry(data)
@@ -55,13 +57,50 @@ console.log(country?.languages)
     }
 
     return (
-        <View>
-            <Text>Here You can see some information about country</Text>
-            <Text><Text>Country Name: </Text>{country?.name}</Text>
-            <Text><Text>Country code: </Text>{country?.code}</Text>
-            <Text><Text>Stay on the continent: </Text>{country?.continent.name}</Text>
-            <Text><Text>Currancy: </Text>{country?.currency}</Text>
-            <Text> <Text>Country languages: </Text> {country?.languages[0].name}</Text>
+        <View style={ styles.container }>
+            <Text style={styles.text}>Here You can see some information about country</Text>
+            <Text style={styles.text}>
+                <Text style={styles.themedText}>Country Name: </Text>
+                {country?.name}
+            </Text>
+            <Text style={styles.text}>
+                <Text style={styles.themedText}>Country name on native language: </Text>
+                {country?.native}
+            </Text>
+            <Text style={styles.text}>
+                <Text style={styles.themedText}>Country code: </Text>
+                {country?.code}
+            </Text>
+            <Text style={styles.text}>
+                <Text style={styles.themedText}>Stay on the continent: </Text>
+                {country?.continent.name}
+            </Text>
+            <Text style={styles.text}>
+                <Text style={styles.themedText}>Currancy: </Text>
+                {country?.currency}
+            </Text>
+            <Text style={styles.text}>
+                <Text style={styles.themedText}>Country languages: </Text>
+                {country?.languages.map(({name}, index) => 
+                    index === (country?.languages.length - 1) 
+                    ? `${name}` : `${name}, ` )}
+            </Text>
+            <Text style={styles.text}>
+                <Text style={styles.themedText}>In the language of this country: </Text>
+                {country?.languages.map(({native}, index) => 
+                    index === (country?.languages.length - 1) 
+                    ? `${native}` : `${native}, ` )}
+            </Text>
+            <Text style={styles.text}>
+                <Text style={styles.themedText}>Country phone code: </Text>
+                {country?.phone}
+            </Text>
+            <Text style={styles.text}>
+                <Text style={styles.themedText}>Country states: </Text>
+                {country?.states?.map(({name}, index) => 
+                    index === (country?.states && country?.states?.length - 1) 
+                    ? `${name}` : `${name}, ` )}
+            </Text>
         </View>
     );
 };
