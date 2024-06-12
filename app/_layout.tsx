@@ -1,37 +1,30 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+import {
+  HomeScreen,
+  AboutScreen,
+} from './screens';
+import ContinentsTabNav from "./navigators/ContinentsTabNav";
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+const Tab = createBottomTabNavigator();
+const client = new ApolloClient({
+  uri: 'https://countries.trevorblades.com/graphql',
+  cache: new InMemoryCache()
+});
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
+    <ApolloProvider client={client}>
+      <NavigationContainer independent>
+        <Tab.Navigator initialRouteName="Home" screenOptions={{ headerTitleAlign: 'center' }}>
+          <Tab.Screen name="Home" component={HomeScreen} />
+          <Tab.Screen name="About" component={AboutScreen} />
+          <Tab.Screen name="Globe" component={ContinentsTabNav} options={{headerShown: false}} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </ApolloProvider>
   );
-}
+};
