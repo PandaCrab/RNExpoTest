@@ -24,7 +24,6 @@ export default function RootLayout() {
       <NavigationContainer independent>
         <Tab.Navigator initialRouteName="Home" screenOptions={({ route }) => ({
             tabBarIcon: () => {
-  
               if (route.name === 'Home') {
                 return (<FontAwesomeIcon icon={faHouse} />)
               } else if (route.name === 'About') {
@@ -37,7 +36,7 @@ export default function RootLayout() {
               return <Text>{route.name}</Text>
             },
             tabBarActiveTintColor: 'purple',
-            tabBarInactiveTintColor: 'lightgray',
+            tabBarInactiveTintColor: 'gray',
             headerTitleAlign: 'center'
           })}>
           <Tab.Screen name="Home" component={HomeScreen} />

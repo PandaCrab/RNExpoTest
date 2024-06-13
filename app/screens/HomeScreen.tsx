@@ -7,7 +7,7 @@ const HomeScreen = ({ navigation }: any) => {
         <View style={ styles.container }>
             <Text style={styles.text}>Welcome to the test project.</Text>
             <Text>In this test project, You can investigate some small information about countries of our planet.</Text>
-            <CustomButton title="Lets start!" onPress={() => navigation.navigate('Countinents')} />
+            <CustomButton title="Lets start!" onPress={() => navigation.navigate('Globe')} />
         </View>
     );
 };

@@ -1,15 +1,10 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { SafeAreaView, Text } from 'react-native';
 import { useQuery } from '@apollo/client';
 
 import { COUNTRIES_QUERY } from '../api/api';
 import UnorderedList from '@/components/UnorderedList';
-
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import type { CountriesStackParamsList } from '@/Types/types';
-
-// type Props = NativeStackScreenProps<CountriesStackParamsList, 'Countries'>
-
+import OrderedList from '@/components/OrderedList';
 
 const CountriesScreen= ({navigation, route}: any) => {
     const { code } = route.params;
@@ -28,7 +23,10 @@ const CountriesScreen= ({navigation, route}: any) => {
     }
 
     return (
-        <UnorderedList data={data.continent.countries}  onPress={handleNavigation} />
+        <SafeAreaView>
+            {/* <OrderedList data={data.continent.countries} /> */}
+            <UnorderedList data={data.continent.countries}  onPress={handleNavigation} />
+        </SafeAreaView>
     );
 };
 
