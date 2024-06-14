@@ -5,11 +5,8 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHouse, faGlobe, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 
-import {
-  HomeScreen,
-  AboutScreen,
-} from './screens';
-import ContinentsTabNav from "./navigators/ContinentsTabNav";
+import { HomeScreen, AboutScreen } from './screens';
+import ContinentsTabNav from "./stacks/ContinentsTabStack";
 
 const Tab = createBottomTabNavigator();
 const client = new ApolloClient({
@@ -30,14 +27,14 @@ export default function RootLayout() {
                 return (<FontAwesomeIcon icon={faCircleInfo} />)
               } else if (route.name === 'Globe') {
                 return (<FontAwesomeIcon icon={faGlobe} />)
-              }
-  
-              // You can return any component that you like here!
+              }  
+              
               return <Text>{route.name}</Text>
             },
             tabBarActiveTintColor: 'purple',
             tabBarInactiveTintColor: 'gray',
-            headerTitleAlign: 'center'
+            headerTitleAlign: 'center',
+            headerBaackground: 'purple'
           })}>
           <Tab.Screen name="Home" component={HomeScreen} />
           <Tab.Screen name="About" component={AboutScreen} />

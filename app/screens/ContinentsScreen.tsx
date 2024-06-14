@@ -9,13 +9,12 @@ import UnorderedList from '@/components/UnorderedList';
 const ContinentsScreen: React.FC<any> = ({ navigation }) => {
     const { data, loading } = useQuery(CONTINENTS_QUERY);
 
-    const handleNavigation: (arg1: {code: string}) => void = ({ code }) => {
-        navigation.navigate('Countries', { code })
-    }
+    const handleNavigation: (arg: {code: string}) => void = ({ code }) => {
+        navigation.navigate('Countries', { code });
+    };
+    
     if (loading) {
-        return (
-            <Text>Loading ...</Text>
-        )
+        return (<Text>Loading ...</Text>);
     }
 
     return (

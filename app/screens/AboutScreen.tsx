@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         fontSize: 16,
     }
-})
+});
 
 export default AboutScreen;

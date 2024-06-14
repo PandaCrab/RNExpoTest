@@ -2,9 +2,9 @@ import React from 'react';
 import { SafeAreaView, Text } from 'react-native';
 import { useQuery } from '@apollo/client';
 
-import { COUNTRIES_QUERY } from '../api/api';
-import UnorderedList from '@/components/UnorderedList';
 import OrderedList from '@/components/OrderedList';
+
+import { COUNTRIES_QUERY } from '../api/api';
 
 const CountriesScreen= ({navigation, route}: any) => {
     const { code } = route.params;
@@ -14,9 +14,9 @@ const CountriesScreen= ({navigation, route}: any) => {
         }
     });
 
-    const handleNavigation: (arg1: {code: string, name?: string}) => void = ({ code, name }) => {
+    const handleNavigation: (arg: {code: string, name: string}) => void = ({ code, name }) => {
         navigation.navigate('Country', { code });
-    }
+    };
 
     if (loading) {
         return (<Text>Countries are loading...</Text>)
@@ -24,8 +24,7 @@ const CountriesScreen= ({navigation, route}: any) => {
 
     return (
         <SafeAreaView>
-            {/* <OrderedList data={data.continent.countries} /> */}
-            <UnorderedList data={data.continent.countries}  onPress={handleNavigation} />
+            <OrderedList data={data.continent.countries} onPress={handleNavigation} />
         </SafeAreaView>
     );
 };

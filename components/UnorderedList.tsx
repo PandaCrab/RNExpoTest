@@ -1,18 +1,16 @@
 import React from 'react';
 import { Text, Pressable, FlatList, SafeAreaView } from "react-native";
 
-import { styles } from '@/styles/UnorderedListStyles';
+import { Data } from '@/Types/types';
+
+import { styles } from '@/styles/ListStyles';
 
 type Props = {
-    data: [{
-        code: string;
-        name: string;
-    }];
-    onPress: (arg1: { name?: string, code: string }) => void;
-}
+    data: Data;
+    onPress: (arg: { name?: string, code: string }) => void;
+};
 
 const UnorderedList: React.FC<Props> = ({ data, onPress }) => {
-
     return (
         <SafeAreaView style={styles.container}>
             <FlatList 

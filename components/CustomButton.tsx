@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pressable, Text, StyleSheet } from 'react-native';
 
-type Props = {
+interface Props {
     color?: string;
     bgColor?: string;
     onPress: () => void;

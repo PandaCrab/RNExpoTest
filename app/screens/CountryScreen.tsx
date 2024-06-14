@@ -4,30 +4,12 @@ import { useQuery } from '@apollo/client';
 
 import { COUNTRY_QUERY } from '../api/api';
 
+import type { CountryData } from '@/Types/types';
+
 import { styles } from '@/styles/CountryScreenStyles';
 
-// type Props = NativeStackScreenProps<CountryStackParamList, 'Country'>;
-
-type Data = {
-    code?: string;
-    continent: {
-        name: string;
-    };
-    currency: string;
-    languages: [{
-        name: string;
-        native: string;
-    }];
-    name: string;
-    native: string;
-    phone: number;
-    states?: [{
-        name: string,
-    }]
-};
-
 const CountryScreen = ({ navigation, route }: any) => {
-    const [country, setCountry] = useState<Data>();
+    const [country, setCountry] = useState<CountryData>();
 
     const { code } = route.params;
     const {data, loading} = useQuery(COUNTRY_QUERY, {
@@ -36,9 +18,9 @@ const CountryScreen = ({ navigation, route }: any) => {
         }
     });
 
-    const dataCatcher: (arg1: Data) => void = async (data) => {
+    const dataCatcher: (arg: CountryData) => void = async (data) => {
         if (data) {
-            await setCountry(data)
+            await setCountry(data);
         }
     };
 
@@ -49,11 +31,11 @@ const CountryScreen = ({ navigation, route }: any) => {
     }, [data]);
 
     if (loading) {
-        return (<Text>Loading</Text>)
+        return (<Text>Loading</Text>);
     } else {
         navigation.setOptions({
             title: data.country.name
-        })
+        });
     }
 
     return (
